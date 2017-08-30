@@ -23,6 +23,7 @@ export class AddPlacePage {
   };
   locationIsSet: boolean = false;
   imageUrl: string = '';
+  imageRef: string = '';
 
   constructor(private modalCtrl: ModalController,
               private geolocation: Geolocation,
@@ -34,7 +35,7 @@ export class AddPlacePage {
   }
 
   onSubmit(form: NgForm) {
-    this.placesService.addPlace(form.value.title, form.value.description, this.location, this.imageUrl);
+    this.placesService.addPlace(form.value.title, form.value.description, this.location, this.imageRef);
     form.reset();
     this.location = {
       lat: 40.7624324,
@@ -66,7 +67,7 @@ export class AddPlacePage {
     this.geolocation
       .getCurrentPosition()
       .then((location) => {
-        loader.dismiss()
+        loader.dismiss();
         this.location.lat = location.coords.latitude;
         this.location.lng = location.coords.longitude;
         this.locationIsSet = true;
@@ -99,6 +100,7 @@ export class AddPlacePage {
           .moveFile(path, currentName, cordova.file.dataDirectory, currentName)
           .then((data: Entry) => {
             this.imageUrl = data.nativeURL;
+            this.imageRef = currentName;
             this.camera.cleanup();
             this.file.removeFile(path, currentName);
           })

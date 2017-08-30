@@ -3,17 +3,18 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {Geolocation} from '@ionic-native/geolocation';
-import {Camera} from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {AddPlacePage} from "../pages/add-place/add-place";
-import {PlacePage} from "../pages/place/place";
-import {SetLocationPage} from "../pages/set-location/set-location";
-import {AgmCoreModule} from "angular2-google-maps/core";
-import {PlacesService} from "../services/places";
+import { AddPlacePage } from "../pages/add-place/add-place";
+import { PlacePage } from "../pages/place/place";
+import { SetLocationPage } from "../pages/set-location/set-location";
+import { AgmCoreModule } from "angular2-google-maps/core";
+import { PlacesService } from "../services/places";
 
 @NgModule({
   declarations: [
@@ -29,8 +30,9 @@ import {PlacesService} from "../services/places";
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD8dgos46efJS4_bU58wB3hjMiLaUSWOzY'
     }),
+    IonicStorageModule.forRoot(),
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [ IonicApp ],
   entryComponents: [
     MyApp,
     HomePage,
@@ -48,4 +50,5 @@ import {PlacesService} from "../services/places";
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
